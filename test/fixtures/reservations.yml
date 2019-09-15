@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  check_in: 2019-07-04 07:01:40
+  check_out: 2019-07-04 07:01:40
+  flat_id: 1
+
+two:
+  check_in: 2019-07-04 07:01:40
+  check_out: 2019-07-04 07:01:40
+  flat_id: 1

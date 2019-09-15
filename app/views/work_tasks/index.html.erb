@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Work Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Work day</th>
+      <th>Task</th>
+			<th>Start Time</th>
+			<th>End Time</th>
+      <th>Finished</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @work_tasks.each do |work_task| %>
+      <tr>
+        <td><%= work_task.work_day_id %></td>
+        <td><%= work_task.task_id %></td>
+				<td><%= work_task.start_time %></td>
+				<td><%= work_task.end_time %></td>
+        <td><%= work_task.finished %></td>
+        <td><%= link_to 'Show', work_task %></td>
+        <td><%= link_to 'Edit', edit_work_task_path(work_task) %></td>
+        <td><%= link_to 'Destroy', work_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Work Task', new_work_task_path %>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @work_day.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @work_day.end_time %>
+</p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @work_day.employee_id %>
+</p>
+
+<%= link_to 'Edit', edit_work_day_path(@work_day) %> |
+<%= link_to 'Back', work_days_path %>

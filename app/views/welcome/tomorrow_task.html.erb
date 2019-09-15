@@ -1,0 +1,43 @@
+<h3>
+	Tomorrows Tasks - 
+	<%= link_to 'Schedule', work_tasks_path(:sch_day => DateTime.now.tomorrow) , class: "text-primary" %>
+</h3>
+
+<table class = "table table-bordered">
+	<tr>
+		<th>Flat</th>
+		<th>Task ID</th>
+		<th>First available time</th>
+		<th>Last available time</th>
+		<th>Change Time</th>
+		<th>Cancel Task</th>
+		<th>Status</th>
+		<th>Employee</th>
+		<th>Start Time</th>
+		<th>End Time</th>
+		<th>Finished</th>
+	</tr>
+	<% @tasks.each do |task| %>
+		<tr>
+			<td><%= Flat.find(task.flat_id).address %></td>
+			<td><%= task.id %></td>
+			<td><%= task.start_time %></td>
+			<td><%= task.end_time%></td>
+			<td><%= link_to 'Change', edit_task_path(task), class: "text-primary" %></td>
+			<td><%= link_to 'Cancel', task_path(task), method: :delete, data: {confirm: "Are you sure?"}, class: "text-primary" %></td>
+			<td><%= task.status %></td>
+			<% if task.status == "assigned" %>
+				<td><%= Employee.find(WorkDay.find(WorkTask.select{|work_task| work_task.task_id == task.id}.first.work_day_id).employee_id).name %></td>
+				<td><%= WorkTask.select{|work_task| work_task.task_id == task.id}.first.start_time %> </td>
+				<td><%= WorkTask.select{|work_task| work_task.task_id == task.id}.first.end_time %></td>
+				<td><%= link_to 'Complete',welcome_change_status_to_finish_path(:id => task.id), class: "text-primary"%></td>
+			<% end %>
+			<% if task.status == "finished" %>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>

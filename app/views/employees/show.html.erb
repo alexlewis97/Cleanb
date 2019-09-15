@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+	<strong>Name:</strong>
+	<%= @employee.name %>
+</p>
+
+<p>
+  <strong>Type of work:</strong>
+  <%= @employee.type_of_work %>
+</p>
+
+<h2>
+	List of Assignments today
+</h2>
+
+<p>
+	<table>
+		<tr>
+			<th> Start Time</th>
+			<th> End Time</th>
+			<th> Flat Address</th>
+		</tr>
+		
+		<% @work_tasks.each do |work_task| %>
+			<% if work_task.task_id != 0 %>
+				<tr>
+					<td> <%= work_task.start_time %></td>
+					<td> <%= work_task.end_time %></td>
+					<td> <%= Flat.find(Task.find(work_task.task_id).flat_id).address %></td>
+				</tr>
+			<% end %>
+		<% end %>
+	</table>
+</p>
+
+<p>
+<%= link_to 'Add Schedule For a Day', new_work_day_path(:num => @employee.id) %>
+
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>
+</p>

@@ -1,0 +1,23 @@
+<h1>
+	Create Task
+</h1>
+
+<%= form_for @task do |f| %>
+	<div class = "field">
+		<%= f.label :type_of_task %>
+		<%= f.text_field :type_of_task %>
+	</div>
+	<div class = "field">
+		<%= f.label :start_time %>
+		<%= f.datetime_select :start_time  %>
+	</div>
+	<div class = "field">
+		<%= f.label :end_time %>
+		<%= f.datetime_select :end_time  %>
+	</div>
+	<div class = "field">
+		<%= f.label :flat_id %>
+		<%= f.number_field :flat_id, :value => params[:num].to_i %> 
+	</div>
+	<%= f.submit %>
+<% end %>

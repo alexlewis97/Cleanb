@@ -1,0 +1,34 @@
+<h3>
+	Employee Schedule
+</h3>
+
+<table class = "table table-bordered">
+	<tr>
+		<th>Employee Name</th>
+		<th>Flat</th>
+		<th>Start Time</th>
+		<th>End Time</th>
+		<th>Status</th>
+		<th>Finished</th>
+	</tr>
+	<% @employees.each do |employee| %>
+		<tr>
+			<td><%= employee.name %></td>
+		</tr>	
+			<% @work_day = WorkDay.all.where(employee_id: employee.id , start_time: [DateTime.now.beginning_of_day..DateTime.now.end_of_day]) %>
+			<% @work_tasks = WorkTask.all.where(work_day_id: @work_day) %>
+			<% @work_tasks = @work_tasks.sort_by {|work_task| [work_task.start_time.hour.to_i]} %>
+			<% @work_tasks.each do |work_task| %>
+			<% if work_task.task_id != 0 %>
+				<tr>
+					<td></td>
+					<td> <%= Flat.find(Task.find(work_task.task_id).flat_id).address %></td>
+					<td> <%= work_task.start_time %></td>
+					<td> <%= work_task.end_time %></td>
+					<td> <%= Task.find(work_task.task_id).status %></td>
+					<td> <%= link_to 'Finished', welcome_change_status_to_finish_via_employee_path(:id => work_task.task_id) %></td>
+				</tr>
+			<% end %>
+		<% end %>
+	<% end %>
+</table>

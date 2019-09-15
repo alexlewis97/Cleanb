@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  flatid: 
+  start_time: 
+  end_time: 
+  finished: 
+
+two:
+  type: 
+  flatid: 
+  start_time: 
+  end_time: 
+  finished: 

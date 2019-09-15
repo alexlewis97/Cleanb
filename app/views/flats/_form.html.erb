@@ -1,0 +1,31 @@
+
+
+<% if @flat.errors.any? %>
+<h2>
+	The following error prevented the flat from getting created
+</h2>
+	<% @flat.errors.full_messages.each do |msg| %>
+		<ul>
+			<%= msg %>	
+		</ul>
+	<% end %>
+<% end %>
+
+
+
+<%= form_for @flat do |f| =%>
+	<p>
+		<%= f.label :address =%><br/>
+		<%= f.text_field :address =%>
+	</p>
+	<p>
+	 	<%= f.label :slots %><br/>
+		<%= f.text_field :slots %><br/>
+	</p>
+	<%= f.submit =%>
+<% end %>
+
+<%= link_to 'Home', root_path %><br/>
+<%= link_to 'Index', flats_path %><br/>
+	</div>
+</div>

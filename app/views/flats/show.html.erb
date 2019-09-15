@@ -1,0 +1,48 @@
+<p>
+	<h3>
+		<%= @flat.address %>
+	</h3>
+</p>
+
+<p>
+	Id:
+	<%= @flat.id %>
+</p>
+
+<p>
+	Slots:
+	<%= @flat.slots %>
+</p>
+
+<p>
+	<h6>
+		List of Reservations	
+	</h6>
+	<p>
+		<table class = "table table-bordered">
+			<tr>
+				<th> Check in</th>
+				<th> Check out</th>
+			</tr>
+			<% @f_reservations.each do |f_reser| %>
+			<tr>
+				<th><%= f_reser.check_in%></th>
+				<th><%= f_reser.check_out%></th>
+			</tr>
+			<% end %>
+    </table>
+	</p>
+<p>
+	<%= link_to 'Add Task', new_task_path(:num => @flat.id) %>
+</p>
+<p>
+	<%= link_to 'Edit', edit_flat_path(@flat) %>
+</p>
+
+<p>
+	<%= link_to 'Home', root_path %>
+</p>
+
+<p>
+	<%= link_to 'New', new_flat_path %>
+</p>

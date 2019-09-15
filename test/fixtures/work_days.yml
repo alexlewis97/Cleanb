@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_time: 
+  end_time: 
+  employee_id: 1
+
+two:
+  start_time: 
+  end_time: 
+  employee_id: 1

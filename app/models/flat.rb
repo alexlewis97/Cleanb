@@ -1,3 +1,6 @@
 class Flat < ApplicationRecord
-	validates :address, presence: true
+	has_many :task
+	has_many :reservation
+	validates :address, presence: true, uniqueness: true
+	
 end

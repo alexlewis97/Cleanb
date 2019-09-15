@@ -1,0 +1,22 @@
+<h1>
+	List of tasks
+</h1>
+
+<table>
+	<tr>
+		<th> Flat </th>
+		<th> Start Time </th>
+		<th> End Time </th>
+		<th> Type of Task</th>
+		
+	</tr>
+	<%@tasks.each do |task| %>
+		<tr>
+			<td> <%= Flat.all.find(task.flat_id).address %></td>
+			<td> <%= task.start_time %></td>
+			<td> <%= task.end_time %></td>
+			<td> <%= task.type_of_task %></td>
+			<td> <%= link_to 'Show', task_path(task) %></td>
+		</tr>
+	<% end %>
+</table>

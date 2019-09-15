@@ -1,0 +1,24 @@
+<h1>
+	Listing all flats
+</h1>
+
+<table>
+	<tr>
+		<th> Address   </th>
+		<th> Show   </th>
+		<th> Edit   </th>
+		<th> Delete   </th>
+	</tr>
+	
+	<% @flats.each do |flat| %>
+		<tr>
+			<td> <%= flat.address %> </td>
+			<td> <%= link_to 'Show', flat_path(flat) %></td>
+			<td> <%= link_to 'Edit', edit_flat_path(flat) %></td>
+			<td> <%= link_to 'Delete',flat_path(flat), method: :delete, data: {confirm: "Are you sure?"} %> </td>
+		</tr>
+	<% end %>
+</table>
+
+
+<%= link_to 'New', new_flat_path %>

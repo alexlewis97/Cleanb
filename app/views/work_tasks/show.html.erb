@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Work day:</strong>
+  <%= @work_task.work_day_id %>
+</p>
+
+<p>
+  <strong>Task:</strong>
+  <%= @work_task.task_id %>
+</p>
+
+<p>
+  <strong>Finished:</strong>
+  <%= @work_task.finished %>
+</p>
+
+<%= link_to 'Edit', edit_work_task_path(@work_task) %> |
+<%= link_to 'Back', work_tasks_path %>

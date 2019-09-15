@@ -1,0 +1,16 @@
+@import "bootstrap";
+
+html, body {
+	height: 100%;
+}
+
+#logo {
+	float: left;
+	font-size: 1/7em;
+	text-transform: uppercase;
+}
+
+#option {
+	align-items: center;
+	justify-content: center;
+}
