@@ -3,8 +3,8 @@
 	<p style = "text-align:center;">
 		<font size = 5>
 			&nbsp; Tasks Today - 
-			<%= link_to 'Schedule', work_tasks_path(:sch_day => DateTime.now) , class: "text-primary" %>
-		</font>
+			<%= link_to 'Schedule', work_tasks_path(:sch_day => DateTime.now) , class: "text-primary" %><br/>
+			</font>
 		</br>
 	</p>
 	<p style = "text-align:right;">
@@ -13,9 +13,10 @@
 	</br>
 </h3>
 
-<table class = "table table-bordered">
+<table class = "table table-bordered table-striped table-hover">
 	<tr>
 		<th>Flat</th>
+		<th>Cluster</th>
 		<th>Task ID</th>
 		<th>First available time</th>
 		<th>Last available time</th>
@@ -31,6 +32,7 @@
 	<% @tasks.each do |task| %>
 		<tr>
 			<td><%= link_to Flat.find(task.flat_id).address, flat_path(task.flat_id) , class: "text-primary" %></td>
+			<td><%= Flat.find(task.flat_id).cluster %></td>
 			<td><%= task.id %></td>
 			<td><%= task.start_time %></td>
 			<td><%= task.end_time%></td>
@@ -42,14 +44,13 @@
 				<td><%= Employee.find(WorkDay.find(WorkTask.select{|work_task| work_task.task_id == task.id}.first.work_day_id).employee_id).name %></td>
 				<td><%= WorkTask.select{|work_task| work_task.task_id == task.id}.first.start_time %> </td>
 				<td><%= WorkTask.select{|work_task| work_task.task_id == task.id}.first.end_time %></td>
-				<td><%= link_to 'Complete',welcome_change_status_to_finish_path(:id => task.id), class: "text-primary"%></td>
 			<% end %>
-			<% if task.status == "finished" %>
-				<td></td>
+			<% if task.status == "finished" || task.status == "error" %>
 				<td></td>
 				<td></td>
 				<td></td>
 			<% end %>
+			<td><%= link_to 'Complete',welcome_change_status_to_finish_path(:id => task.id), class: "text-primary"%></td>
 		</tr>
 	<% end %>
 </table>

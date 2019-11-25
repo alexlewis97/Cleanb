@@ -10,9 +10,9 @@
   <%= @employee.type_of_work %>
 </p>
 
-<h2>
+<h6>
 	List of Assignments today
-</h2>
+</h6>
 
 <p>
 	<table>
@@ -35,8 +35,14 @@
 </p>
 
 <p>
-<%= link_to 'Add Schedule For a Day', new_work_day_path(:num => @employee.id) %>
+	<%= link_to 'Add Schedule For a Day', new_work_day_path(:num => @employee.id) %>
+</p>
 
-<%= link_to 'Edit', edit_employee_path(@employee) %> |
-<%= link_to 'Back', employees_path %>
+<p>
+	<%= link_to 'Edit Today schedule', edit_work_day_path(@work_day.id) %>	
+</p>
+
+<p>
+	<%= link_to 'Edit', edit_employee_path(@employee) %> |
+	<%= link_to 'Back', employees_path %>
 </p>

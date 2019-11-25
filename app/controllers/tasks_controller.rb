@@ -65,7 +65,7 @@ class TasksController < ApplicationController
 		@task.save
 		
 		#need to update the reservations
-		@reservation = Reservation.find{|reser| reser.flat_id == @task.flat_id && reser.check_out.end_of_day == @task.start_time.end_of_day}
+		@reservation = Reservation.find{|rester| reser.flat_id == @task.flat_id && reser.check_out.end_of_day == @task.start_time.end_of_day}
 		if(@reservation)
 			@reservation.check_out = @task.start_time
 			@reservation.save
@@ -109,6 +109,7 @@ class TasksController < ApplicationController
 		#here we need to change the code and change it to delete tasks only if they are different 
 		#we need to update all the tasks for the flats
 		@reservations = Reservation.all
+		@tasks = Array.new
 		@flats = Flat.all
 		@flats.each do |flat|
 			if(@reservations.where(flat_id: flat.id))
@@ -121,11 +122,16 @@ class TasksController < ApplicationController
 					@task.flat_id = @flat_reservations[counter].flat_id
 					@task.status = "unassigned"
 					counter = counter + 1
-					@task.save
+					@tasks.push(@task)
 				end
 				#task.start_time = @flat_reservations[counter].check_out
 				#task.end_time = @flat_reservations[counter].check_out.change(year: @flat_reservations[counter].check_out.year.to_i + 1)				
 				#task.flat_id = @flat_reservations[counter].flat_id
+			end
+		end
+		ActiveRecord::Base.transaction do
+			@tasks.each do |task|
+				task.save
 			end
 		end
 		redirect_to root_url

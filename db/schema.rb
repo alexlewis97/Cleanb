@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_12_104724) do
+ActiveRecord::Schema.define(version: 2019_11_04_204141) do
 
   create_table "employees", force: :cascade do |t|
     t.string "type_of_work"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2019_09_12_104724) do
     t.datetime "updated_at"
     t.integer "slots"
     t.integer "cluster"
+    t.string "temp_cluster"
   end
 
   create_table "reservations", force: :cascade do |t|

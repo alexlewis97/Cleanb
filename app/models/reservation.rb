@@ -46,8 +46,10 @@ class Reservation < ApplicationRecord
 		
 		Reservation.delete_all
 		
-		r_reservations.each do |reser|
-			reser.save
+		ActiveRecord::Base.transaction do 
+			r_reservations.each do |reser|
+				reser.save
+			end
 		end
 		
 

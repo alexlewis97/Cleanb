@@ -10,7 +10,7 @@ class EmployeesController < ApplicationController
   # GET /employees/1
   # GET /employees/1.json
   def show
-		@work_day = WorkDay.all.where(employee_id: @employee.id , start_time: [DateTime.now.beginning_of_day..DateTime.now.end_of_day])
+		@work_day = WorkDay.all.where(employee_id: @employee.id , start_time: [DateTime.now.beginning_of_day..DateTime.now.end_of_day]).first
 		@work_tasks = WorkTask.all.where(work_day_id: @work_day)
 		@work_tasks = @work_tasks.sort_by {|work_task| [work_task.start_time.hour.to_i]}
   end
@@ -46,7 +46,9 @@ class EmployeesController < ApplicationController
   # PATCH/PUT /employees/1.json
   def update
     respond_to do |format|
-      if @employee.update(employee_params)
+      if "1" == "1"
+				@employee.name = params[:employee][:name]
+				@employee.save
         format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
         format.json { render :show, status: :ok, location: @employee }
       else

@@ -25,7 +25,10 @@ class WorkDaysController < ApplicationController
   # POST /work_days.json
   def create
     @work_day = WorkDay.new(work_day_params)
-		
+		#delete for today everything else 
+		WorkDay.select{|wd| wd.employee_id == @work_day.employee_id}.each do |wd|
+			wd.destroy
+		end
 		
     respond_to do |format|
 			#validation line, make sure that this employee doesnt already have a schedule for today

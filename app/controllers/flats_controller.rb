@@ -3,18 +3,6 @@ class FlatsController < ApplicationController
 	def index 
 		@flats = Flat.all
 		counter = 1
-		(1..10).each do 
-			@employee = Employee.new
-			@employee.name = "name" + counter.to_s
-			counter = counter + 1
-			@employee.save
-			@work_day = WorkDay.new
-			@work_day.start_time = DateTime.now.change(hour: 8, min: 0)
-			@work_day.end_time = DateTime.now.change(hour: 18, min: 0)
-			@work_day.employee_id = @employee.id
-			@work_day.save
-		end
-		
 	end
 	
 	def new
@@ -68,6 +56,6 @@ class FlatsController < ApplicationController
 	
 	private
 		def flat_params
-			params.require(:flat).permit(:address, :slots)
+			params.require(:flat).permit(:address, :slots, :cluster)
 		end
 end

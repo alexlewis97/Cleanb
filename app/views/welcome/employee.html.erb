@@ -2,10 +2,11 @@
 	Employee Schedule
 </h3>
 
-<table class = "table table-bordered">
+<table class = "table table-bordered table-striped table-hover">
 	<tr>
 		<th>Employee Name</th>
 		<th>Flat</th>
+		<th>Cluster</th>
 		<th>Start Time</th>
 		<th>End Time</th>
 		<th>Status</th>
@@ -13,7 +14,13 @@
 	</tr>
 	<% @employees.each do |employee| %>
 		<tr>
-			<td><%= employee.name %></td>
+			<td><%= link_to employee.name, employee_path(employee.id) %></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>	
 			<% @work_day = WorkDay.all.where(employee_id: employee.id , start_time: [DateTime.now.beginning_of_day..DateTime.now.end_of_day]) %>
 			<% @work_tasks = WorkTask.all.where(work_day_id: @work_day) %>
@@ -22,7 +29,8 @@
 			<% if work_task.task_id != 0 %>
 				<tr>
 					<td></td>
-					<td> <%= Flat.find(Task.find(work_task.task_id).flat_id).address %></td>
+					<td> <%= link_to Flat.find(Task.find(work_task.task_id).flat_id).address, flat_path(Flat.find(Task.find(work_task.task_id).flat_id).id) %></td>
+					<td> <%= Flat.find(Task.find(work_task.task_id).flat_id).cluster %></td>
 					<td> <%= work_task.start_time %></td>
 					<td> <%= work_task.end_time %></td>
 					<td> <%= Task.find(work_task.task_id).status %></td>
@@ -31,4 +39,19 @@
 			<% end %>
 		<% end %>
 	<% end %>
+	<tr>
+		<td>Unassigned</td>
+	</tr>
+	<% @unassigned_tasks.each do |task| %>
+		<tr>
+			<td> <%= link_to task.id, task_path(task.id) %></td>
+			<td><%= link_to Flat.find(task.flat_id).address, flat_path(Flat.find(task.flat_id)) %></td>
+			<td><%= Flat.find(task.flat_id).cluster %></td>
+			<td></td>
+			<td></td>
+			<td><%= task.status %></td>
+			<td><%= link_to 'Finished', welcome_change_status_to_finish_via_employee_path(:id => task.id) %></td>
+		</tr>
+	<% end %>
+	
 </table>
