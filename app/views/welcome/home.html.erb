@@ -29,7 +29,7 @@
 		<th>End Time</th>
 		<th>Finished</th>
 	</tr>
-	<% if @tasks != nil %>
+	<% if @tasks.exists? %>
 		<% @tasks.each do |task| %>
 			<tr>
 				<td><%= link_to Flat.find(task.flat_id).address, flat_path(task.flat_id) , class: "text-primary" %></td>
