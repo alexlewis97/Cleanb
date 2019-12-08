@@ -4,19 +4,7 @@ class WelcomeController < ApplicationController
 			#wt.delete
 		#end	
 		if Task.all != nil 
-			@tasks = Task.all.select{|task| task.start_time > DateTime.now.beginning_of_day && task.start_time < DateTime.now.end_of_day}
-			@tasks_temp = Task.all.select{|task| task.status != "finished" && task.start_time < DateTime.now.beginning_of_day && task.end_time > DateTime.now.beginning_of_day}
-			@tasks = (@tasks + @tasks_temp)
-			@tasks = @tasks.sort_by{|task| [task.start_time]}
-
-			@tasks.each do |task|
-				if WorkTask.select{|work_task| work_task.task_id == task.id}.first == nil && task.status == "assigned"
-					if WorkDay.find.(WorkTask.select{|work_task| work_task.task_id == task.id}.first.work_day_id) == nil
-						task.status = "unassigned"
-						task.save
-					end			
-				end
-			end
+			
 		end
 	end
 	
