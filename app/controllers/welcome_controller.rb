@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
 			#wt.delete
 		#end
 			
-		if Task.empty? == false 
+		if Task.all.empty? == false 
 			
 		end
 	end
