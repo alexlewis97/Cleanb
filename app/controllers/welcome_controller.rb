@@ -3,10 +3,7 @@ class WelcomeController < ApplicationController
 		#WorkTask.all.select{|wt| wt.start_time.beginning_of_day < DateTime.now.beginning_of_day}.each do |wt| 
 			#wt.delete
 		#end
-			
-		if Task.all.empty? == false 
-			
-		end
+		
 	end
 	
 	def tomorrow_task 
