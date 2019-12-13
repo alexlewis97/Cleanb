@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
 			#wt.delete
 		#end
 			
-		if Task.any? == true 
+		if Task.empty? == false 
 			@tasks = Task.all.select{|task| task.start_time > DateTime.now.beginning_of_day && task.start_time < DateTime.now.end_of_day}
 			@tasks_temp = Task.all.select{|task| task.status != "finished" && task.start_time < DateTime.now.beginning_of_day && task.end_time > DateTime.now.beginning_of_day}
 			@tasks = (@tasks + @tasks_temp)
